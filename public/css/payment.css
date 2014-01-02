@@ -1,0 +1,46 @@
+fieldset {
+    overflow: auto;
+    border: 0;
+    margin: 0;
+    padding: 0; }
+
+fieldset div {
+    float: left; }
+
+fieldset.centered div {
+    text-align: center; }
+
+label {
+    color: #183b55;
+    display: block;
+    margin-bottom: 5px; }
+
+label img {
+    display: block;
+    margin-bottom: 5px; }
+
+input.text {
+    border: 1px solid #bfbab4;
+    margin: 0 4px 8px 0;
+    padding: 6px;
+    color: #1e1e1e;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0px 5px 5px #eee;
+    -moz-box-shadow: inset 0px 5px 5px #eee;
+    box-shadow: inset 0px 5px 5px #eee; }
+.submit {
+    display: block;
+    background-color: #76b2d7;
+    border: 1px solid #766056;
+    color: #3a2014;
+    margin: 13px 0;
+    padding: 8px 16px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    -webkit-box-shadow: inset 3px -3px 3px rgba(0,0,0,.5), inset 0 3px 3px rgba(255,255,255,.5), inset -3px 0 3px rgba(255,255,255,.75);
+    -moz-box-shadow: inset 3px -3px 3px rgba(0,0,0,.5), inset 0 3px 3px rgba(255,255,255,.5), inset -3px 0 3px rgba(255,255,255,.75);
+    box-shadow: inset 3px -3px 3px rgba(0,0,0,.5), inset 0 3px 3px rgba(255,255,255,.5), inset -3px 0 3px rgba(255,255,255,.75); }

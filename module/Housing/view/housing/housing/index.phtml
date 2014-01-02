@@ -1,0 +1,33 @@
+<?php   
+if ($this->messages) {
+    echo' <div class="alert in alert-block fade alert-success"><a class="close" data-dismiss="alert">×</a>';
+
+    foreach ($this->messages as $message) {
+        echo '<p>' . $message . '</p>';
+    }
+    echo '</div>';
+}
+?>
+
+<h3><?=$this->title;?></h3>
+<div class="widget-box">
+
+    <div class="widget-title">
+        <span class="icon"><i class="icon-globe"></i></span>
+        <h5>Housing</h5>
+    </div>
+    
+    <div class="widget-content nopadding">
+        <?
+        $form = $this->form;
+        $form->setAttribute(
+                'action', $this->url('housing/process', array('action' => 'authenticate'))
+        );
+        $form->prepare();
+        echo $this->form()->openTag($form);
+        echo '<legend>Housing Application</legend>';
+        echo $this->formCollection($form);
+        echo $this->form()->closeTag();
+        ?>
+    </div>
+</div>

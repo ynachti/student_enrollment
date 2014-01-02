@@ -1,0 +1,72 @@
+<?
+if(!$this->ZfcUserIdentity()): 
+     echo $this->zfcUserLoginApi(); 
+else:
+?>
+
+<?php   
+if ($this->messages) {
+    echo' <div class="alert in alert-block fade alert-success"><a class="close" data-dismiss="alert">?</a>';
+
+    foreach ($this->messages as $message) {
+        echo '<p>' . $message . '</p>';
+    }
+    echo '</div>';
+}
+?>
+
+<script>
+    $( function() {
+	init();
+});
+
+var signatureSaveURL = '/student_enrollment/public/transcript-request/inquire/request';
+var afterSaveRedirectURL = '/student_enrollment/public/transcript-request/';
+var imageSavePath = "/usr/local/zend/apache2/htdocs/student_enrollment/public/images/signs/";
+function customFunction(signatureFile){
+        afterSaveRedirectURL += "&textone=" + $('#textone').val() + "&texttwo=" + $('#texttwo').val() + "&numone=" + $('#numone').val() + "&dateone=" + $('#dateone').val(); 
+	//alert(signatureFile); 
+}
+-->
+</script>
+<div id="signature" class="signature-box">
+	<canvas id="signaturePad" width="500" height="170">
+		<p>Unfortunately, your browser does not support our signature Pad.</p>
+		<p>Supported browsers: <br>
+		<a href="http://www.mozilla.com">Firefox</a>, <br>
+		<a href="http://www.google.com/chrome/">Chrome</a>, <br>
+		<a href="http://www.apple.com/safari">Safari</a>, <br>
+		<a href="http://www.opera.com">Opera</a>, <br>
+		<a href="http://www.konqueror.org">Konqueror</a>.</p>
+	</canvas> <br>
+	<center>
+		<input type="button" name="reset" value="Clear Signature" style="width:49%" onclick="javascript:clearSignature()">
+		<input type="button" id="saveSignatureButton" name="save" value="Save Signature" style="width:49%" onclick="javascript:saveSignature()">
+	</center>
+
+</div>
+<h3><?=$this->title;?></h3>
+<div class="hero-unit"><?= $this->paragraph1 ?></div>
+<div class="widget-box">
+
+    <div class="widget-title">
+        <span class="icon"><i class="icon-globe"></i></span>
+        <h5>Transcript Request</h5>
+    </div>
+    
+    <div class="widget-content nopadding">
+        <?
+        $form = $this->form;
+        $form->setAttribute(
+                'action', $this->url('process/request', array('action' => 'process'))
+        );
+        $form->prepare();
+        echo $this->form()->openTag($form);
+        echo '<legend>New Request submission</legend>';
+        echo $this->formCollection($form);
+        echo $this->form()->closeTag();
+        
+        ?>
+    </div>
+</div>
+<? endif; ?>

@@ -1,0 +1,155 @@
+<?
+if (!$this->ZfcUserIdentity()):
+    echo $this->zfcUserLoginApi();
+else:
+    if ($this->messages):
+        echo' <div class="alert in alert-block fade alert-success"><a class="close" data-dismiss="alert">?</a>';
+        foreach ($this->messages as $message):
+            echo '<p>' . $message . '</p>';
+        endforeach;
+        echo '</div>';
+    endif;
+    ?>
+    <h3><?= $this->title; ?></h3>
+    <div class="widget-box">
+
+        <div class="widget-title">
+            <span class="icon"><i class="icon-globe"></i></span>
+            <h5>Transaction Form</h5>
+        </div>
+        <? if (!count($_POST) && !count($_GET)): ?>
+            <div class="widget-content nopadding">
+                <?
+                //components of the form
+                $form_vars = $this->form_vars;
+                $billing = $this->Billing;
+                $shipping = $this->Shipping;
+                $cc = $this->Cc;
+                $bank = $this->Bank;
+
+                //prepare the form
+                $bank->prepare();
+                $cc->prepare();
+                $shipping->prepare();
+                $billing->prepare();
+
+                $billing->setAttribute('action', $form_vars['post_url']);  //$this->url('transaction/request'));
+                $billing->setAttribute('method', 'post');
+                $billing->setAttribute('class', 'form-inline');
+                $bank->setAttribute('class', 'zend_form');
+                echo $this->form()->openTag($billing);
+
+                //hidden fields
+                foreach ($form_vars['hidden_fields'] as $key => $value):
+                    if (!empty($value)):
+                        $hidden_elements = new Zend\Form\Element\Hidden($key);
+                        $hidden_elements->setValue($value);
+                        echo $this->formHidden($hidden_elements);
+                    endif;
+                endforeach;
+                ?>
+                <legend><?php echo $this->translate('Student Information'); ?></legend>
+
+                <div>
+                    <div class="billing fluid">
+                        <h4>Billing Information</h4>  
+                        <?
+                        foreach ($billing as $element):
+                            if($element->getName() == 'x_state' || $element->getName() == 'x_country'):
+                                echo '<span style="padding-right: 40px;">&nbsp;</span>'; 
+                            endif;
+                            echo $this->formLabel($element);
+                            if ($element instanceof Zend\Form\Element\Select):
+                                echo $this->formSelect($element);
+                            else:
+                                echo $this->formInput($element);
+                            endif;
+
+                            echo '<span class="alert-error">' . $this->formElementErrors($element) . '</span>';
+                        endforeach;
+                        ?>                             
+                    </div>
+
+                    <div class="shipping fluid">
+                        <h4>Shipping Information <input type="radio" name="shippingselect" onClick = "FillShipping(this.form)">
+                        <span style="color: green; font-size: 10pt">same as billing</span></h4> 
+                        
+<?
+                        foreach ($shipping as $element):
+                            if($element->getName() == 'x_ship_to_state' || $element->getName() == 'x_ship_to_country'):
+                                echo '<span style="padding-right: 40px;">&nbsp;</span>'; 
+                            endif;
+                            echo $this->formLabel($element);
+                            if ($element instanceof Zend\Form\Element\Select):
+                                echo $this->formSelect($element);
+                            else:
+                                echo $this->formInput($element);
+                            endif;
+
+                            echo '<span class="alert-error">' . $this->formElementErrors($element) . '</span>';
+                        endforeach;
+                        ?> 
+                    </div>
+                    <div style="clear:both"></div>
+                </div> 
+
+                <legend><?php echo $this->translate('Payment Method'); ?></legend>
+
+                <div class="payment">
+                    <div style="float: left; width: 30%">
+                        <input type="radio" name="ptype" onClick='$("#bankpayment").hide();
+                                        $("#ccpayment").show();' checked /> Credit Card<br />
+                        <input type="radio" name="ptype"  onClick='$("#ccpayment").hide();
+                                        $("#bankpayment").show();'/> Bank Account
+                    </div>
+
+                    <div style="float: right; width: 70%">
+                        <div id="ccpayment">
+                            <div style="padding: 5px">
+                                <img width="43" height="26" alt="Visa" title="Visa" src="<?= $this->basePath() . '/img/icons/payments/V.gif'; ?>"></img>
+                                <img width="41" height="26" alt="MasterCard" title="MasterCard" src="<?= $this->basePath() . '/img/icons/payments/MC.gif'; ?>"></img>
+                                <img width="40" height="26" alt="American Express" title="American Express" src="<?= $this->basePath() . '/img/icons/payments/Amex.gif'; ?>"></img>
+                                <img width="40" height="26" alt="Discover" title="Discover" src="<?= $this->basePath() . '/img/icons/payments/Disc.gif'; ?>"></img>    
+                            </div>
+                            <div class="element-group">
+                                <?
+                                foreach ($cc as $element):
+                                    //(!$element instanceof Zend\Form\Element\Captcha) ? '<dl>' : '<dl class="captcha">';
+                                    if ($element instanceof Zend\Form\Element):
+                                        echo $this->formLabel($element);
+                                        echo $this->formInput($element);
+                                        echo '<span class="alert-error">' . $this->formElementErrors($element) . '</span>';
+                                    elseif ($element instanceof Zend\Form\Element\Button):
+                                        echo $this->formButton($element);
+                                    elseif ($element instanceof Zend\Form\Element\Captcha):
+                                        echo $this->formCaptcha($element);
+                                    endif;
+                                endforeach;
+                                ?>
+                            </div>
+                        </div>
+                        <div id="bankpayment" style="display: none">
+
+                            <?
+                            foreach ($bank as $element):
+                                //(!$element instanceof Zend\Form\Element\Captcha) ? '<dl>' : '<dl class="captcha">';
+                                if ($element instanceof Zend\Form\Element):
+                                    echo '<dl>' . $this->formLabel($element) . '</dl>';
+                                    echo '<dd>' . $this->formInput($element) . '</dd>';
+                                    echo '<span class="alert-error">' . $this->formElementErrors($element) . '</span>';
+                                elseif ($element instanceof Zend\Form\Element\Button):
+                                    echo $this->formButton($element);
+                                elseif ($element instanceof Zend\Form\Element\Captcha):
+                                    echo $this->formCaptcha($element);
+                                endif;
+                            endforeach;
+                            ?>                               
+
+                        </div>
+                    </div>
+                </div>
+                <?php echo $this->form()->closeTag() ?>
+                <div style="clear: both"></div>
+        <? endif; ?>
+        </div>
+<? endif; ?>

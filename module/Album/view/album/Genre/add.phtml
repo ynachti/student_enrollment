@@ -1,0 +1,29 @@
+<?php
+// module/Album/view/album/album/edit.phtml:
+
+$title = 'Add Genre';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<form name="add"  method="post">
+<table class="table">
+
+<tr>
+    <td>
+        <b>Title</b>
+    </td>
+    
+    <td>
+        <input type="text" name="title" value="">
+    </td>     
+</tr>
+<tr>
+    <td colspan="2" align="center">
+        <input type="submit" name="submit" value="Add a New Record">
+    </td>     
+</tr>
+
+</table>
+
+</form>

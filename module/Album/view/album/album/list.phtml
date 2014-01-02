@@ -1,0 +1,50 @@
+<?php
+// module/Album/view/album/album/index.phtml:
+
+$title = 'My albums';
+$this->headTitle($title);
+?>
+
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<form name="edit"  method="post"  enctype="multipart/form-data">
+<div class="table" align="center">
+    Search
+    <input type"text" size="40" name="searchStr" value="<?php echo $this->escapeHtml($srchStr); ?>">
+    <input type="submit" name="submit" value="Search"><br><br>
+    <input type="button" name="add" value="Add New Album" onClick="location.href='<?php echo $this->url('album', array('action'=>'add'));?>'">
+    <!-- a href="<?php echo $this->url('album', array('action'=>'add'));?>">Add new album</a --->
+</div>
+</form>
+<hr>
+<table class="table">
+
+<tr>
+    <th>Title</th>
+    <th>Artists</th>
+    <th>Genre</th>
+    <th>&nbsp;</th>
+</tr>
+
+
+
+<?php foreach ($albums as $album) : ?>
+
+<tr>    
+
+    
+    <td><a href="<?php echo $this->url('album', array('action'=>'edit','id'=>$album->getId()));?>"><?php echo $this->escapeHtml($album->getTitle());?></a></td>
+    <td><?php echo $this->escapeHtml($album->getArtist());?></td>
+    <td><?php echo $this->escapeHtml($album->getGenre());?></td>
+    <td>    
+       <a href="<?php echo $this->url('album', array('action'=>'edit','id'=>$album->getId()));?>">Edit</a>
+       <a href="<?php echo $this->url('album', array('action'=>'delete','id'=>$album->getId()));?>">Delete </a>    
+    </td>
+</tr>
+<?php endforeach; ?>
+</table>
+ 
+ 
+ 
+

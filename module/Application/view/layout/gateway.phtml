@@ -1,0 +1,144 @@
+<?php
+//doctype
+echo $this->doctype();
+?>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle('Student Enrollment Technology' . $this->translate('Rooster Template'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
+
+        <!-- Le styles -->
+        <?php
+        echo $this->headLink(array(
+                    'rel' => 'shortcut icon',
+                    'type' => 'image/vnd.microsoft.icon',
+                    'href' => $this->basePath() . '/images/favicon.ico'))
+                ->prependStylesheet($this->basePath() . '/css/bootstrap-responsive.min.css')
+                ->prependStylesheet($this->basePath() . '/css/style.css')
+                ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')
+                ->prependStylesheet($this->basePath() . '/css/social-style.css')
+                ->prependStylesheet($this->basePath() . '/css/blue.css')
+                ->prependStylesheet($this->basePath() . '/css/select2.css')
+                //->prependStylesheet($this->basePath() . '/css/payment.css')
+//                ->prependStylesheet($this->basePath() . '/css/jquery.gritter.css')
+        ?>
+
+        <!-- Scripts -->
+        <?php
+        echo $this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array(
+                    'conditional' => 'lt IE 9'))
+                //->prependFile($this->basePath() . '/js/unicorn.interface.js')
+                ->prependFile($this->basePath() . '/js/unicorn.js')
+                ->prependFile($this->basePath() . '/js/bootstrap.min.js')
+                ->prependFile($this->basePath() . '/js/jquery-1.7.2.min.js')
+//                ->prependFile($this->basePath() . '/js/ezsign-javascript.js')
+                
+//                ->prependFile($this->basePath() . '/js/jquery.gritter.min.js')
+        ?>
+
+    </head>
+    <body>
+
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a>
+                    <a class="brand" href="http://www.unlv.edu"><img alt="" src=""><!-- <span class="icon-bar">--></span><span class="icon-bar"></span><span class="icon-bar"></span></a>
+
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li class="navbar-link">
+                                <a href="<?php echo $this->url('home') ?>"><i class="icon icon-home"></i></a>
+                            </li>
+
+                        </ul>
+                        <div class="dropdown login-button">
+                            <? if (!$this->zfcUserIdentity()): ?>                        
+                                <a href="<?php echo $this->url('zfcuser/login-form') ?>#myModal" role="button" data-toggle="modal">
+                                    <button class="btn">Login</button>
+                                </a>                  
+                            <? else: ?>
+
+                               <div class="user-thumb"><?= $this->zfcUserDisplayName() ?></div>                        
+                                <a class="user-thumb user-thumb-link" data-toggle="dropdown"><span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="-1" href="<?php echo $this->url('zfcuser/logout') ?>">Logout</a></li>
+                                    <li><a tabindex="-1" href="<?php echo $this->url('zfcuser/profile') ?>">Profile</a></li>
+                                </ul>
+
+
+
+                            <? endif; ?>
+                        </div>
+                    </div> 
+
+                    <!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>                   
+        <? echo $this->ZfcUserLoginWidget();  ?>
+        <div class="container"> 
+            <?= $this->content; ?> 
+        </div>
+
+        <div class='navbar navbar-fixed-bottom'>
+            <div class="subnavbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" >
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span></a>
+                    <div class="nav-collapse" >
+
+                        <ul  class="nav">
+
+                            <li><a href="http://www.unlv.edu">UNLV Website</a></li>
+
+                            <li><a href=""></a></li>
+
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Visit UNLV <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="-1" href="http://www.unlv.edu/eventservices/accommodations">Accomodations on Campus</a></li>
+                                    <li><a tabindex="-1" href="http://www.unlv.edu/admissions/tours">Campus Tours</a></li>
+                                    <li><a tabindex="-1" href="http://www.unlv.edu/maps/addresses-directions">Driving Directions</a></li>
+                                    <li><a tabindex="-1" href="http://www.unlv.edu/maps">Maps & Parking</a></li>
+                                    <li><a tabindex="-1" href="http://web.unlv.edu/global/images/galleries/Campus/">Photo Gallery</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Contact Us <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="-1" href="contact/admissions">Admissions</a></li>
+                                    <li><a tabindex="-1" href="contact/registrar">Registrar's Office</a></li>
+                                    <li><a tabindex="-1" href="contact/enrollment_technology">Enrollment Technology</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <footer>
+                <div class="container feature">
+                    <h1>University of Nevada, Las Vegas</h1>
+                    <?php require 'social.phtml'; ?>
+                </div>
+            </footer>
+            <div id='footer'>
+                <h4>Designed and Developed by Enterprise Application Services | &copy; 2014 University of Nevada, Las Vegas</h4>
+            </div>
+        </div>
+        <?php echo $this->inlineScript()
+                ->prependFile($this->basePath('js/ezsign-javascript.js')) 
+                ->prependFile($this->basePath('js/shipping-billing.js')) 
+                ->prependFile($this->basePath('js/select2.js')) 
+                //->prependFile($this->basePath('js/jquery.wizard.js')) 
+                //->prependFile($this->basePath('js/unicorn.wizard.js')) 
+        ?>
+    </body>
+</html>

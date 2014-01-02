@@ -1,0 +1,7 @@
+  
+    /*  @ManyToMany( targetEntity =" Entity\ Role")  
+     * @JoinTable( name =" users_roles", 
+     * joinColumns ={@ JoinColumn( name =" user", referencedColumnName =" id")}, 
+     * inverseJoinColumns ={@ JoinColumn( name =" role", 17 * referencedColumnName =" id") }  
+     *  )  
+     */

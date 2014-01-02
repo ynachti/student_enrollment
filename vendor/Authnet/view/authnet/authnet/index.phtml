@@ -1,0 +1,33 @@
+<?
+if(!$this->ZfcUserIdentity()): 
+     echo $this->zfcUserLoginApi(); 
+else:
+?>
+
+<?php   
+if ($this->messages) {
+    echo' <div class="alert in alert-block fade alert-success"><a class="close" data-dismiss="alert">?</a>';
+
+    foreach ($this->messages as $message) {
+        echo '<p>' . $message . '</p>';
+    }
+    echo '</div>';
+}
+?>
+
+<h3><?=$this->title;?></h3>
+<div class="widget-box">
+
+    <div class="widget-title">
+        <span class="icon"><i class="icon-globe"></i></span>
+        <h5>Transcript Request</h5>
+    </div>
+    
+    <div class="widget-content nopadding">
+       <? foreach($this->links as $key=>$val): ?>
+           <a class="btn" href="<?php echo $this->url($val) . ($this->redirect ? '?redirect=' . $this->redirect : '') ?>"><?php echo $this->translate($key); ?></a>
+       <? endforeach; ?>
+       <? echo $this->contact; ?>
+    </div>
+</div>
+<? endif; ?>

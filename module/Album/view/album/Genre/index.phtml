@@ -1,0 +1,38 @@
+<?php
+// module/Album/view/album/album/index.phtml:
+
+$title = 'Genres';
+$this->headTitle($title);
+?>
+
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>
+    <a href="<?php echo $this->url('genre', array('action'=>'add'));?>">Add New Genre</a>
+</p>
+
+
+
+
+<table class="table">
+<tr>
+    <th>Genre</th>
+    <th>&nbsp;</th>
+</tr>
+
+
+<?php foreach ($results as $result) : ?>
+
+<tr>    
+    <td><?php echo $this->escapeHtml($result->getTitle());?></td>
+    <td>    
+       <a href="<?php echo $this->url('genre', array('action'=>'edit','id'=>$result->getId()));?>">Edit </a>
+       <a href="<?php echo $this->url('genre', array('action'=>'delete','id'=>$result->getId()));?>">Delete </a>    
+    </td>
+</tr>
+<?php endforeach; ?>
+</table>
+ 
+ 
+ 
+

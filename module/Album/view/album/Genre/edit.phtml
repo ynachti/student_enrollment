@@ -1,0 +1,66 @@
+<?php
+// module/formdata/view/formdata/formdata/edit.phtml:
+use Zend\Form\Element\File;
+use Zend\Form\Element\DateTime;
+$title = 'Edit Genre';
+$this->headTitle($title);
+?>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>jQuery UI Datepicker - Default functionality</title>
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> 
+  <script src='http://jquery-multifile-plugin.googlecode.com/svn/trunk/jquery.js' type="text/javascript"></script>
+  <link type="text/css" href="http://www.fyneworks.com/@/js/jquery/ui/jquery.ui.css" rel="stylesheet"/>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js" type="text/javascript"></script>
+  <script src='http://jquery-multifile-plugin.googlecode.com/svn/trunk/jquery.form.js' type="text/javascript" language="javascript"></script>
+  <script src='http://jquery-multifile-plugin.googlecode.com/svn/trunk/jquery.MetaData.js' type="text/javascript" language="javascript"></script>
+  <script src='http://jquery-multifile-plugin.googlecode.com/svn/trunk/jquery.MultiFile.js' type="text/javascript" language="javascript"></script>
+  
+  
+  <link rel="stylesheet" href="/resources/demos/style.css" />
+  <script>
+  $(function() {
+    $( "#datepicker" ).datepicker();
+  });
+  </script>
+</head>
+<body>
+ 
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<form name="edit"  method="post"  enctype="multipart/form-data">
+<table class="table">
+
+
+
+<input type="hidden" name="id" value="<?php echo $this->escapeHtml($formdata->id);?>">
+<tr>
+    <td>
+        <b>Title</b>
+    </td>
+    
+    <td>
+        <input type="text" name="title" value="<?php echo $this->escapeHtml($formdata->title);?>">
+    </td>
+               
+</tr>
+
+<tr>
+    <td colspan="2" align="center">
+        <input type="submit" name="submit" value="Update">
+    </td>     
+</tr>
+
+</table>
+
+</form>
+
+
+
+</body>
+
+</html>

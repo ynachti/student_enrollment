@@ -1,0 +1,34 @@
+<!--Current students index page-->
+<?
+if(!$this->ZfcUserIdentity()): 
+     echo $this->zfcUserLoginApi(); 
+else:
+?>
+
+<h3><?php ($this->title ? $this->translate($this->title) : NULL); ?></h3>
+
+<div class="widget-box">
+    <div class="widget-title"><span class="icon"><i class="icon-survey"></i></span>
+        <h5>List of Applications</h5>
+    </div>
+    <div class="widget-content nopadding">
+        <div class="row-fluid">
+            <div class="span4">
+                <ul class="site-stats">
+                    <?
+                    if ($this->apps):
+                        foreach ($this->apps as $key => $value):
+                            ?>
+                            <li><a href="<?= $value ?>"><?= $key ?></a></li>
+                        <?
+                        endforeach;
+                    endif;
+                    ?>
+                </ul>
+                <!--<pre> <? //print_r($this->service);  ?> </pre>-->
+                <!--<pre><? //print_r($this->identity);  ?> </pre>-->
+            </div>
+        </div>
+    </div>
+</div>
+<? endif; ?>

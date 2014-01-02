@@ -1,0 +1,30 @@
+<?php
+header("Content-type: application/vnd.ms-excel");
+header("Content-Disposition: attachment;Filename=document_name.xls");
+
+echo "<html>";
+echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=Windows-1252\">";
+echo "<body>";
+echo '<table class="table">';
+echo '<tr>';
+echo '<th>First Name</th>';
+echo '<th>Last Name</th>';
+echo '</tr>';
+
+foreach ($data as $item)
+{
+	echo '<tr>';
+	echo '<td>' . $this->escapeHtml($item->getLastname()) . '</td>';
+	echo '<td>' . $this->escapeHtml($item->getAcadyear()) . '</td>';
+	echo '</tr>';
+}
+	
+echo '</table>';
+
+echo "</body>";
+echo "</html>";
+
+ 
+?> 
+ 
+
