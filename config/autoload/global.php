@@ -15,8 +15,7 @@ return array(
 		
 //    Connection driver to the local mysql database
     'db_mysql_local' => array(
-//        'username' => 'rooster',
-//        'password' => 'nachit19',
+
         'driver' => 'Pdo',
         'dsn' => 'mysql:dbname=ess_users;host=127.0.0.1;port=3307',
         'driver_options' => array(
