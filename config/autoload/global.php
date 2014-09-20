@@ -36,18 +36,4 @@ return array(
 );
 
 
-//Application specific connections
-//
-//TRANREQ:
-//'tranreq_dev' => array(
-//'username' => 'tranreq',
-// 'password' => 'HBTR%iMo9'
-//),
-// 'tranreq_test' => array(
-//'username' => 'test1',
-// 'password' => 'w8e6u_e'
-//),
-// 'tranreq_prod' => array(
-//'username' => 'tranreq',
-// 'password' => 'Ujape8EX'
-//)
+
